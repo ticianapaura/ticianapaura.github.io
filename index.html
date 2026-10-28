@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ticiana Paura · Portfolio</title>
+<meta name="description" content="Portfolio de Ticiana Paura: proyectos y experimentos.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0d1117;--bg2:#161b22;--line:#30363d;--text:#e6edf3;--muted:#8b949e;--accent:#3fb950;--accent2:#58a6ff;--pink:#f778ba}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:Inter,system-ui,sans-serif;line-height:1.6}
+a{color:var(--accent2);text-decoration:none}
+a:hover{text-decoration:underline}
+.mono{font-family:"JetBrains Mono",monospace}
+.wrap{max-width:960px;margin:0 auto;padding:0 20px}
+nav{position:sticky;top:0;background:rgba(13,17,23,.85);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);z-index:10}
+nav .wrap{display:flex;justify-content:space-between;align-items:center;height:56px}
+nav .logo{color:var(--accent);font-weight:700}
+nav ul{display:flex;gap:20px;list-style:none;font-size:14px}
+nav ul a{color:var(--muted)}
+nav ul a:hover{color:var(--text);text-decoration:none}
+.hero{padding:96px 0 72px}
+.prompt{color:var(--accent);font-size:15px;margin-bottom:16px}
+.prompt span{color:var(--muted)}
+h1{font-family:"JetBrains Mono",monospace;font-size:clamp(34px,7vw,60px);line-height:1.1;margin-bottom:20px}
+h1 .hl{color:var(--accent2)}
+.cursor{display:inline-block;width:.55em;height:1em;background:var(--accent);vertical-align:-.12em;animation:blink 1s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+.lead{color:var(--muted);font-size:18px;max-width:600px;margin-bottom:32px}
+.btns{display:flex;gap:12px;flex-wrap:wrap}
+.btn{font-family:"JetBrains Mono",monospace;font-size:14px;padding:10px 18px;border-radius:6px;border:1px solid var(--line);color:var(--text);background:var(--bg2)}
+.btn:hover{border-color:var(--accent);text-decoration:none}
+.btn.primary{background:var(--accent);color:#0d1117;border-color:var(--accent);font-weight:600}
+section{padding:64px 0;border-top:1px solid var(--line)}
+h2{font-family:"JetBrains Mono",monospace;font-size:24px;margin-bottom:28px}
+h2::before{content:"// ";color:var(--muted)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:18px}
+.card{background:var(--bg2);border:1px solid var(--line);border-radius:10px;padding:22px;display:flex;flex-direction:column;transition:border-color .2s,transform .2s}
+.card:hover{border-color:var(--accent2);transform:translateY(-3px)}
+.card .top{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;color:var(--muted)}
+.card h3{font-family:"JetBrains Mono",monospace;font-size:18px;margin-bottom:8px}
+.card p{color:var(--muted);font-size:15px;flex:1;margin-bottom:16px}
+.tags{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}
+.tag{font-family:"JetBrains Mono",monospace;font-size:12px;padding:2px 10px;border-radius:999px;border:1px solid var(--line);color:var(--pink)}
+.links{display:flex;gap:16px;font-family:"JetBrains Mono",monospace;font-size:14px}
+.card.soon{border-style:dashed;align-items:center;justify-content:center;text-align:center;min-height:220px}
+.about{display:grid;grid-template-columns:1fr;gap:24px}
+.about p{color:var(--muted);font-size:17px;max-width:680px}
+.stack{display:flex;gap:10px;flex-wrap:wrap}
+.stack span{font-family:"JetBrains Mono",monospace;font-size:13px;background:var(--bg2);border:1px solid var(--line);border-radius:6px;padding:6px 12px}
+footer{border-top:1px solid var(--line);padding:32px 0;color:var(--muted);font-size:14px}
+footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
+@media (max-width:560px){nav ul{gap:14px;font-size:13px}.hero{padding:64px 0 48px}}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <a href="#" class="logo mono">~/ticiana</a>
+    <ul class="mono">
+      <li><a href="#proyectos">proyectos</a></li>
+      <li><a href="#sobre-mi">sobre mí</a></li>
+      <li><a href="#contacto">contacto</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <p class="prompt mono">ticiana@github <span>~ $</span> whoami</p>
+    <h1>Hola, soy <span class="hl">Ticiana</span><span class="cursor"></span></h1>
+    <p class="lead">Armo proyectos web e interfaces, y uso este espacio para compartir lo que voy construyendo y aprendiendo.</p>
+    <div class="btns">
+      <a class="btn primary" href="#proyectos">Ver proyectos</a>
+      <a class="btn" href="https://github.com/ticianapaura" target="_blank" rel="noopener">GitHub ↗</a>
+    </div>
+  </div>
+</header>
+
+<section id="proyectos">
+  <div class="wrap">
+    <h2>proyectos</h2>
+    <div class="grid" id="lista-proyectos">
+
+      <!-- PROYECTOS: copiá este bloque <article> para agregar uno nuevo -->
+      <article class="card soon">
+        <div>
+          <h3>Checkout</h3>
+          <p>Próximamente.</p>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<section id="sobre-mi">
+  <div class="wrap about">
+    <h2>sobre mí</h2>
+    <p>Me interesa el diseño de interfaces y el desarrollo web. Me gusta pasar de una idea a algo que funcione, probar, iterar y aprender en el camino.</p>
+    <div class="stack">
+      <span>HTML</span><span>CSS</span><span>JavaScript</span><span>UI Design</span><span>IA</span>
+    </div>
+  </div>
+</section>
+
+<section id="contacto">
+  <div class="wrap">
+    <h2>contacto</h2>
+    <p class="lead">¿Querés charlar sobre algún proyecto? Escribime por GitHub.</p>
+    <div class="btns">
+      <a class="btn" href="https://github.com/ticianapaura" target="_blank" rel="noopener">github.com/ticianapaura ↗</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap mono">
+    <span>© <span id="y"></span> Ticiana Paura</span>
+    <span>hecho con ♥ y café</span>
+  </div>
+</footer>
+
+<script>document.getElementById('y').textContent=new Date().getFullYear();</script>
+</body>
+</html>
