@@ -1,2 +1,5 @@
 # ticianapaura.github.io
-Mi portfolio personal
+
+Portfolio of **Ticiana Paura**, Senior Product Designer growing into Design Engineering.
+
+🔗 https://ticianapaura.github.io
