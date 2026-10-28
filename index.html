@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Ticiana Paura · Portfolio</title>
-<meta name="description" content="Portfolio de Ticiana Paura: proyectos y experimentos.">
+<meta name="description" content="Ticiana Paura: Senior Product Designer growing into Design Engineering.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
@@ -49,6 +49,10 @@ h2::before{content:"// ";color:var(--muted)}
 .card.soon{border-style:dashed;align-items:center;justify-content:center;text-align:center;min-height:220px}
 .about{display:grid;grid-template-columns:1fr;gap:24px}
 .about p{color:var(--muted);font-size:17px;max-width:680px}
+.role{color:var(--pink);font-size:16px;margin-bottom:16px}
+.role span{color:var(--muted)}
+.industries{display:flex;gap:10px;flex-wrap:wrap;font-size:13px}
+.industries span{color:var(--accent);border:1px solid var(--line);border-radius:999px;padding:4px 12px}
 .stack{display:flex;gap:10px;flex-wrap:wrap}
 .stack span{font-family:"JetBrains Mono",monospace;font-size:13px;background:var(--bg2);border:1px solid var(--line);border-radius:6px;padding:6px 12px}
 footer{border-top:1px solid var(--line);padding:32px 0;color:var(--muted);font-size:14px}
@@ -62,9 +66,9 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
   <div class="wrap">
     <a href="#" class="logo mono">~/ticiana</a>
     <ul class="mono">
-      <li><a href="#proyectos">proyectos</a></li>
-      <li><a href="#sobre-mi">sobre mí</a></li>
-      <li><a href="#contacto">contacto</a></li>
+      <li><a href="#work">work</a></li>
+      <li><a href="#about">about</a></li>
+      <li><a href="#contact">contact</a></li>
     </ul>
   </div>
 </nav>
@@ -72,26 +76,27 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
 <header class="hero">
   <div class="wrap">
     <p class="prompt mono">ticiana@github <span>~ $</span> whoami</p>
-    <h1>Hola, soy <span class="hl">Ticiana</span><span class="cursor"></span></h1>
-    <p class="lead">Armo proyectos web e interfaces, y uso este espacio para compartir lo que voy construyendo y aprendiendo.</p>
+    <h1>Hi, I'm <span class="hl">Ticiana</span><span class="cursor"></span></h1>
+    <p class="role mono">Senior Product Designer <span>→</span> Design Engineer</p>
+    <p class="lead">I design products for complex, regulated spaces, and increasingly I build them too. This is where I share the work, and the code behind it.</p>
     <div class="btns">
-      <a class="btn primary" href="#proyectos">Ver proyectos</a>
+      <a class="btn primary" href="#work">See my work</a>
       <a class="btn" href="https://github.com/ticianapaura" target="_blank" rel="noopener">GitHub ↗</a>
     </div>
   </div>
 </header>
 
-<section id="proyectos">
+<section id="work">
   <div class="wrap">
-    <h2>proyectos</h2>
+    <h2>selected work</h2>
     <div class="grid" id="lista-proyectos">
 
-      <!-- PROYECTOS: copiá este bloque <article> para agregar uno nuevo -->
+      <!-- PROJECTS: copy this <article> block to add a new one -->
       <article class="card">
         <div class="top"><span class="mono">01 · UX/UI</span><span>💳</span></div>
         <h3>Checkout White Label</h3>
-        <p>Flujo de pago de 3 pasos (método, monto y confirmación) pensado para que cualquier comercio lo adapte a su marca. Incluye tarjetas guardadas, validación de CVV y foco accesible entre pantallas.</p>
-        <div class="tags"><span class="tag">React</span><span class="tag">TypeScript</span><span class="tag">UX/UI</span></div>
+        <p>A 3-step payment flow (method, amount, confirmation) built so any merchant can re-skin it with their own brand. Saved cards, CVV validation, design tokens and accessible focus handling between screens. Designed and coded end to end.</p>
+        <div class="tags"><span class="tag">Fintech</span><span class="tag">React</span><span class="tag">TypeScript</span><span class="tag">Design tokens</span></div>
         <div class="links">
           <a href="https://ticianapaura.github.io/checkout-ux-ui/" target="_blank" rel="noopener">demo ↗</a>
           <a href="https://github.com/ticianapaura/checkout-ux-ui" target="_blank" rel="noopener">repo ↗</a>
@@ -102,20 +107,22 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
   </div>
 </section>
 
-<section id="sobre-mi">
+<section id="about">
   <div class="wrap about">
-    <h2>sobre mí</h2>
-    <p>Me interesa el diseño de interfaces y el desarrollo web. Me gusta pasar de una idea a algo que funcione, probar, iterar y aprender en el camino.</p>
+    <h2>about</h2>
+    <p>I'm a Senior Product Designer with a background in Graphic Design from the University of Buenos Aires (UBA). I've worked across fintech, banking, gaming, government and healthcare, shaping products where clarity, trust and accessibility really matter.</p>
+    <p>Lately I'm moving toward design engineering: prototyping in code, building components and design systems, and closing the gap between what gets designed and what gets shipped.</p>
+    <div class="industries mono"><span>fintech</span><span>banking</span><span>gaming</span><span>government</span><span>healthcare</span></div>
     <div class="stack">
-      <span>HTML</span><span>CSS</span><span>JavaScript</span><span>UI Design</span><span>IA</span>
+      <span>Product Design</span><span>UX Research</span><span>Design Systems</span><span>Figma</span><span>Prototyping</span><span>React</span><span>TypeScript</span><span>CSS</span><span>AI-assisted building</span>
     </div>
   </div>
 </section>
 
-<section id="contacto">
+<section id="contact">
   <div class="wrap">
-    <h2>contacto</h2>
-    <p class="lead">¿Querés charlar sobre algún proyecto? Escribime por GitHub.</p>
+    <h2>contact</h2>
+    <p class="lead">Want to talk about a product, a role or a project? Find me on GitHub.</p>
     <div class="btns">
       <a class="btn" href="https://github.com/ticianapaura" target="_blank" rel="noopener">github.com/ticianapaura ↗</a>
     </div>
@@ -125,7 +132,7 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
 <footer>
   <div class="wrap mono">
     <span>© <span id="y"></span> Ticiana Paura</span>
-    <span>hecho con ♥ y café</span>
+    <span>designed &amp; built by me ♥</span>
   </div>
 </footer>
 
