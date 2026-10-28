@@ -24,7 +24,7 @@ nav ul{display:flex;gap:20px;list-style:none;font-size:14px;align-items:center}
 nav ul a{color:var(--muted)}
 nav ul a:hover{color:var(--text);text-decoration:none}
 .hero{padding:88px 0 72px;background:repeating-linear-gradient(90deg,var(--pink) 0 104px,#fff 104px 120px);border-bottom:1px solid var(--line)}
-.hero .box{background:rgba(251,240,239,.95);border:1px solid var(--line);border-radius:16px;padding:40px;max-width:720px}
+.hero .box{background:#fff;border:1px solid var(--line);border-radius:16px;padding:40px;max-width:720px}
 .prompt{color:var(--blue);font-size:15px;margin-bottom:14px}
 .prompt span{color:var(--muted)}
 h1{font-family:"JetBrains Mono",monospace;font-size:clamp(34px,7vw,58px);line-height:1.1;margin-bottom:16px}
@@ -33,8 +33,9 @@ h1 .hl{color:var(--blue)}
 @keyframes blink{50%{opacity:0}}
 .role{display:inline-block;font-size:14px;color:#fff;background:var(--blue);border-radius:999px;padding:4px 14px;margin-bottom:18px}
 .lead{color:var(--muted);font-size:18px;max-width:600px;margin-bottom:20px}
-.note{display:flex;gap:10px;align-items:flex-start;font-size:14px;color:var(--text);background:#fff;border:1px solid var(--line);border-left:3px solid var(--blue);border-radius:8px;padding:10px 14px;margin-bottom:26px;max-width:600px}
+.note{display:flex;gap:10px;align-items:flex-start;font-size:14px;color:var(--text);background:var(--bluebg);border:1px solid var(--line);border-left:3px solid var(--blue);border-radius:8px;padding:10px 14px;margin-bottom:26px;max-width:600px}
 .note b{color:var(--blue)}
+.note svg{flex:none;width:18px;height:18px;fill:var(--blue);margin-top:1px}
 .btns{display:flex;gap:12px;flex-wrap:wrap;align-items:center}
 .btn{font-family:"JetBrains Mono",monospace;font-size:14px;padding:10px 18px;border-radius:8px;border:1px solid var(--line);color:var(--text);background:#fff;display:inline-flex;align-items:center;gap:8px}
 .btn:hover{border-color:var(--blue);text-decoration:none}
@@ -60,7 +61,7 @@ h2::before{content:"// ";color:var(--blue)}
 .stage .bar .rec{display:inline-flex;align-items:center;gap:6px;color:var(--blue)}
 .stage .bar .rec::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--blue);animation:blink 1.2s steps(1) infinite}
 .stage .bar .w{font-variant-numeric:tabular-nums}
-.viewport{position:relative;margin:0 auto;padding:22px 0}
+.viewport{position:relative;margin:0 auto;padding:24px 32px}
 .frame{position:relative;margin:0 auto;overflow:hidden;border-radius:12px;border:8px solid var(--text);background:#fff;box-shadow:0 14px 34px rgba(29,27,27,.14);transition:width 1.4s cubic-bezier(.65,0,.35,1),border-radius 1.4s}
 .frame.is-mobile{border-radius:28px}
 .frame iframe{position:absolute;top:0;left:0;border:0;transform-origin:0 0;pointer-events:none;transition:width 1.4s cubic-bezier(.65,0,.35,1)}
@@ -100,7 +101,7 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
       <h1>Hi, I'm <span class="hl">Ticiana</span><span class="cursor"></span></h1>
       <span class="role mono">Senior Product Designer → Design Engineer</span>
       <p class="lead">I design products for complex, regulated spaces, and increasingly I build them too. This is where I share the work, and the code behind it.</p>
-      <p class="note"><span>💡</span><span>Here on GitHub you'll see the <b>front-end side</b> of my work: the code behind my designs. For case studies and visual design, head to <a href="https://www.behance.net/ticianne" target="_blank" rel="noopener">Behance</a>.</span></p>
+      <p class="note"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a7 7 0 0 0-4 12.74V17a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1v-2.26A7 7 0 0 0 12 2zM9 20a1 1 0 0 0 1 1h4a1 1 0 0 0 1-1v-1H9v1z"/></svg><span>Here on GitHub you'll see the <b>front-end side</b> of my work: the code behind my designs. For case studies and visual design, head to <a href="https://www.behance.net/ticianne" target="_blank" rel="noopener">Behance</a>.</span></p>
       <div class="btns">
         <a class="btn primary" href="#work">See my work</a>
         <div class="social">
@@ -156,7 +157,7 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
     <h2>contact</h2>
     <p class="lead">Want to talk about a product, a role or a project? Let's connect.</p>
     <div class="contact-links">
-      <a class="btn primary" href="https://www.linkedin.com/in/ticianapaura/" target="_blank" rel="noopener">LinkedIn ↗</a>
+      <a class="btn" href="https://www.linkedin.com/in/ticianapaura/" target="_blank" rel="noopener">LinkedIn ↗</a>
       <a class="btn" href="https://www.behance.net/ticianne" target="_blank" rel="noopener">Behance ↗</a>
       <a class="btn" href="https://medium.com/@ticianapaura" target="_blank" rel="noopener">Medium ↗</a>
       <a class="btn" href="https://github.com/ticianapaura" target="_blank" rel="noopener">GitHub ↗</a>
@@ -177,7 +178,7 @@ document.getElementById('y').textContent=new Date().getFullYear();
   var DESK=1366, MOB=390, H=820;
   var vp=document.getElementById('viewport'), frame=document.getElementById('frame'), ifr=document.getElementById('demo'), lbl=document.getElementById('vw');
   var cur=DESK;
-  function k(){return Math.min(1,(vp.clientWidth-16)/DESK);}
+  function k(){return Math.min(1,(vp.clientWidth-64-16)/DESK);}
   function size(w){cur=w;var s=k();frame.style.width=(w*s+16)+'px';frame.style.height=(H*s+16)+'px';ifr.style.width=w+'px';ifr.style.height=H+'px';ifr.style.transform='scale('+s+')';frame.classList.toggle('is-mobile',w<700);lbl.textContent=w+'px · '+(w<700?'mobile':'desktop');}
   window.addEventListener('resize',function(){size(cur);});
   size(DESK);
