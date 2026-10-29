@@ -67,12 +67,12 @@ h2::before{content:"// ";color:var(--blue)}
 .frame{position:relative;flex:none;overflow:hidden;border-radius:10px;border:6px solid var(--text);background:#fff;box-shadow:0 12px 28px rgba(29,27,27,.14);transition:width 1.4s cubic-bezier(.65,0,.35,1),height 1.4s cubic-bezier(.65,0,.35,1),border-radius 1.4s}
 .frame.is-mobile{border-radius:24px}
 .frame iframe{position:absolute;top:0;left:0;border:0;transform-origin:0 0;transition:transform 1.4s cubic-bezier(.65,0,.35,1)}
-#frame iframe{pointer-events:none}
+.frame iframe{pointer-events:none}
 .phone{border-radius:24px;background:#222}
 .hint{font-family:"JetBrains Mono",monospace;font-size:11px;color:var(--muted)}
-:root{--stage-h:540px}
+:root{--stage-h:max(240px,33vh)}
 @media (max-width:1000px){.projects{grid-template-columns:repeat(2,minmax(0,1fr))}}
-@media (max-width:640px){.projects{grid-template-columns:1fr} :root{--stage-h:560px}}
+@media (max-width:640px){.projects{grid-template-columns:1fr} :root{--stage-h:max(260px,40vh)}}
 .about{display:grid;grid-template-columns:1fr;gap:22px}
 .about p{color:var(--muted);font-size:17px;max-width:700px}
 .chips{display:flex;gap:10px;flex-wrap:wrap}
@@ -148,8 +148,8 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
 
     <article class="project">
       <div class="stage">
-        <div class="bar"><span class="rec">live demo</span><span class="hint">tap send to play</span></div>
-        <div class="viewport"><div class="frame phone is-mobile" data-fit><iframe data-src="https://ticianapaura.github.io/tammy-ai-assistant/ai-conversation/#welcome" title="AI conversation with Tammy, playable demo"></iframe></div></div>
+        <div class="bar"><span class="rec">live preview</span><span class="hint">AI flow · autoplay</span></div>
+        <div class="viewport"><div class="frame phone is-mobile" data-fit><iframe data-src="https://ticianapaura.github.io/tammy-ai-assistant/ai-conversation/#welcome" title="AI conversation with Tammy preview" tabindex="-1" aria-hidden="true"></iframe></div></div>
       </div>
       <div class="body">
         <div class="top"><span class="mono">02 · AI assistant</span><span class="mono">mobile</span></div>
@@ -165,8 +165,8 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
 
     <article class="project">
       <div class="stage">
-        <div class="bar"><span class="rec">live demo</span><span class="hint">tap send to play</span></div>
-        <div class="viewport"><div class="frame phone is-mobile" data-fit><iframe data-src="https://ticianapaura.github.io/tammy-ai-assistant/live-agent/#handoff" title="Live agent handoff, playable demo"></iframe></div></div>
+        <div class="bar"><span class="rec">live preview</span><span class="hint">agent handoff · autoplay</span></div>
+        <div class="viewport"><div class="frame phone is-mobile" data-fit><iframe data-src="https://ticianapaura.github.io/tammy-ai-assistant/live-agent/#handoff" title="Live agent handoff preview" tabindex="-1" aria-hidden="true"></iframe></div></div>
       </div>
       <div class="body">
         <div class="top"><span class="mono">03 · AI assistant</span><span class="mono">mobile</span></div>
@@ -219,6 +219,15 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
 <script>
 document.getElementById('y').textContent=new Date().getFullYear();
 (function(){
+  // The demos inside the cards focus their own inputs; never let that move the page.
+  window.__noScrollFocus=function(i){try{var w=i.contentWindow,P=w.HTMLElement.prototype,f=P.focus;if(P.__patched)return;P.focus=function(o){return f.call(this,Object.assign({},o||{},{preventScroll:true}));};P.__patched=true;}catch(e){}};
+  var lastY=window.scrollY,userAt=0;
+  ['wheel','touchstart','touchmove','keydown','mousedown','pointerdown'].forEach(function(t){window.addEventListener(t,function(){userAt=Date.now();},{passive:true});});
+  window.addEventListener('scroll',function(){if(Date.now()-userAt<2000){lastY=window.scrollY;}else if(Math.abs(window.scrollY-lastY)>2){window.scrollTo({top:lastY,behavior:'instant'});}},{passive:true});
+  document.querySelectorAll('iframe').forEach(function(i){i.addEventListener('load',function(){window.__noScrollFocus(i);});});
+  window.__visible=function(el){var r=el.getBoundingClientRect();return r.bottom>0&&r.top<window.innerHeight;};
+})();
+(function(){
   var DESK=1366, MOB=390, H=820;
   var vp=document.getElementById('viewport'), frame=document.getElementById('frame'), ifr=document.getElementById('demo'), lbl=document.getElementById('vw');
   var cur=DESK;
@@ -241,13 +250,14 @@ document.getElementById('y').textContent=new Date().getFullYear();
     await wait(700); var pay=await until(function(){var b=btn(/^Pay/);return b&&!b.disabled&&b;},3000); if(pay) pay.click();
     await wait(2600);
   }
-  function reload(){return new Promise(function(r){ifr.addEventListener('load',function h(){ifr.removeEventListener('load',h);r();});ifr.contentWindow.location.reload();});}
+  function reload(){return new Promise(function(r){ifr.addEventListener('load',function h(){ifr.removeEventListener('load',h);window.__noScrollFocus(ifr);r();});ifr.contentWindow.location.reload();});}
   async function loop(){
     await new Promise(function(r){if(doc()&&doc().readyState==='complete')r();else ifr.addEventListener('load',function(){r();},{once:true});});
+    async function seen(){while(!window.__visible(vp))await wait(500);}
     while(true){
-      await flow(); await reload(); await wait(500);
+      await seen(); await flow(); await reload(); await wait(500);
       size(MOB); await wait(1800);
-      await flow(); await reload(); await wait(500);
+      await seen(); await flow(); await reload(); await wait(500);
       size(DESK); await wait(1800);
     }
   }
@@ -257,7 +267,29 @@ document.getElementById('y').textContent=new Date().getFullYear();
   var phones=[].slice.call(document.querySelectorAll('[data-fit]'));
   function fit(){phones.forEach(function(f){var vp=f.parentNode,cs=getComputedStyle(vp);var aw=vp.clientWidth-parseFloat(cs.paddingLeft)-parseFloat(cs.paddingRight)-12;var ah=vp.clientHeight-parseFloat(cs.paddingTop)-parseFloat(cs.paddingBottom)-12;var s=Math.min(aw/390,ah/844);f.style.width=(390*s+12)+'px';f.style.height=(844*s+12)+'px';var i=f.querySelector('iframe');i.style.width='390px';i.style.height='844px';i.style.transform='scale('+s+')';});}
   window.addEventListener('resize',fit);fit();
-  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){var i=e.target.querySelector('iframe');if(!i.src)i.src=i.dataset.src;io.unobserve(e.target);}});},{rootMargin:'300px'});
+  var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var wait=function(ms){return new Promise(function(r){setTimeout(r,ms);});};
+  function q(d,sel){return d&&d.querySelector(sel);}
+  function byText(d,re){return d&&[].slice.call(d.querySelectorAll('button')).find(function(b){return !b.disabled&&re.test(b.textContent.trim());});}
+  // Plays the real app: taps quick replies, the rating, Send feedback and the send button, like a person would.
+  async function autoplay(i){
+    var load=function(){return new Promise(function(r){i.addEventListener('load',function h(){i.removeEventListener('load',h);r();});});};
+    while(true){
+      var start=Date.now(), idle=0;
+      while(Date.now()-start<60000 && idle<4){
+        await wait(2300);
+        while(!window.__visible(i.parentNode))await wait(500);
+        var d; try{d=i.contentDocument;}catch(e){return;}
+        var el=q(d,'[aria-label="Choose an option"] button:not(:disabled)')
+          || (function(){var r=d&&d.querySelectorAll('[aria-label^="Satisfaction from"] button');return r&&r.length?r[3]:null;})()
+          || byText(d,/^Send feedback/)
+          || (function(){var b=q(d,'button[aria-label="Send message"]:not(:disabled)'),t=q(d,'textarea[aria-label="Message"]');return b&&t&&t.value.trim()?b:null;})();
+        if(el){el.click();idle=0;}else{idle++;}
+      }
+      await wait(1500); while(!window.__visible(i.parentNode))await wait(500); var p=load(); i.contentWindow.location.reload(); await p; window.__noScrollFocus(i); await wait(800);
+    }
+  }
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){var i=e.target.querySelector('iframe');if(!i.src){i.addEventListener('load',function(){window.__noScrollFocus(i);});i.src=i.dataset.src;if(!reduce)i.addEventListener('load',function(){autoplay(i);},{once:true});}io.unobserve(e.target);}});},{rootMargin:'0px'});
   phones.forEach(function(f){io.observe(f);});
 })();
 </script>
