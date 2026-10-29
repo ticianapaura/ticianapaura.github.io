@@ -48,23 +48,31 @@ h1 .hl{color:var(--blue)}
 section{padding:72px 0;border-bottom:1px solid var(--line)}
 h2{font-family:"JetBrains Mono",monospace;font-size:24px;margin-bottom:28px}
 h2::before{content:"// ";color:var(--blue)}
-.project{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:28px;display:grid;grid-template-columns:1fr;gap:28px}
-.project .top{display:flex;justify-content:space-between;align-items:center;color:var(--muted);font-size:13px;margin-bottom:10px}
-.project h3{font-family:"JetBrains Mono",monospace;font-size:22px;line-height:1.3;margin-bottom:10px}
-.project p{color:var(--muted);font-size:16px;margin-bottom:16px;max-width:720px}
-.tags{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:18px}
-.tag{font-family:"JetBrains Mono",monospace;font-size:12px;padding:3px 11px;border-radius:999px;background:var(--pink);color:var(--text)}
+.projects{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;align-items:stretch}
+.project{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px;display:flex;flex-direction:column;gap:18px}
+.project .body{display:flex;flex-direction:column;flex:1;padding:0 6px 6px}
+.project .top{display:flex;justify-content:space-between;align-items:center;gap:8px;color:var(--muted);font-size:12px;margin-bottom:8px}
+.project h3{font-family:"JetBrains Mono",monospace;font-size:18px;line-height:1.3;margin-bottom:10px}
+.project p{color:var(--muted);font-size:15px;margin-bottom:16px}
+.tags{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:18px}
+.tag{font-family:"JetBrains Mono",monospace;font-size:12px;padding:3px 10px;border-radius:999px;background:var(--pink);color:var(--text)}
 .tag.g{background:var(--bluebg);color:var(--blue2)}
-.links{display:flex;gap:18px;font-family:"JetBrains Mono",monospace;font-size:14px;flex-wrap:wrap}
+.links{display:flex;gap:16px;font-family:"JetBrains Mono",monospace;font-size:14px;flex-wrap:wrap;margin-top:auto}
 .stage{position:relative;background:#fff;border:1px solid var(--line);border-radius:12px;overflow:hidden}
-.stage .bar{display:flex;justify-content:space-between;align-items:center;padding:10px 14px;border-bottom:1px solid var(--line);font-family:"JetBrains Mono",monospace;font-size:12px;color:var(--muted)}
-.stage .bar .rec{display:inline-flex;align-items:center;gap:6px;color:var(--blue)}
+.stage .bar{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:9px 12px;border-bottom:1px solid var(--line);font-family:"JetBrains Mono",monospace;font-size:11px;color:var(--muted)}
+.stage .bar .rec{display:inline-flex;align-items:center;gap:6px;color:var(--blue);white-space:nowrap}
 .stage .bar .rec::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--blue);animation:blink 1.2s steps(1) infinite}
-.stage .bar .w{font-variant-numeric:tabular-nums}
-.viewport{position:relative;margin:0 auto;padding:24px 32px}
-.frame{position:relative;margin:0 auto;overflow:hidden;border-radius:12px;border:8px solid var(--text);background:#fff;box-shadow:0 14px 34px rgba(29,27,27,.14);transition:width 1.4s cubic-bezier(.65,0,.35,1),border-radius 1.4s}
-.frame.is-mobile{border-radius:28px}
-.frame iframe{position:absolute;top:0;left:0;border:0;transform-origin:0 0;pointer-events:none;transition:width 1.4s cubic-bezier(.65,0,.35,1)}
+.stage .bar .w{font-variant-numeric:tabular-nums;white-space:nowrap}
+.viewport{position:relative;height:var(--stage-h);display:flex;align-items:center;justify-content:center;padding:16px 20px}
+.frame{position:relative;flex:none;overflow:hidden;border-radius:10px;border:6px solid var(--text);background:#fff;box-shadow:0 12px 28px rgba(29,27,27,.14);transition:width 1.4s cubic-bezier(.65,0,.35,1),height 1.4s cubic-bezier(.65,0,.35,1),border-radius 1.4s}
+.frame.is-mobile{border-radius:24px}
+.frame iframe{position:absolute;top:0;left:0;border:0;transform-origin:0 0;transition:transform 1.4s cubic-bezier(.65,0,.35,1)}
+#frame iframe{pointer-events:none}
+.phone{border-radius:24px;background:#222}
+.hint{font-family:"JetBrains Mono",monospace;font-size:11px;color:var(--muted)}
+:root{--stage-h:540px}
+@media (max-width:1000px){.projects{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:640px){.projects{grid-template-columns:1fr} :root{--stage-h:560px}}
 .about{display:grid;grid-template-columns:1fr;gap:22px}
 .about p{color:var(--muted);font-size:17px;max-width:700px}
 .chips{display:flex;gap:10px;flex-wrap:wrap}
@@ -77,7 +85,6 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
   nav ul li.hide-sm{display:none}
   .hero{padding:48px 0}
   .hero .box{padding:26px}
-  .project{padding:20px}
 }
 </style>
 </head>
@@ -119,24 +126,61 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
   <div class="wrap">
     <h2>selected work</h2>
 
-    <!-- PROJECTS: copy this <article> block to add a new one -->
+    <!-- PROJECTS: copy one <article> block to add a new card -->
+    <div class="projects">
+
     <article class="project">
-      <div>
-        <div class="top"><span class="mono">01 · fintech · design + code</span><span class="mono">desktop &amp; mobile</span></div>
+      <div class="stage" aria-label="Animated preview of the checkout moving between screens and from desktop to mobile">
+        <div class="bar"><span class="rec">live preview</span><span class="w mono" id="vw">1366px · desktop</span></div>
+        <div class="viewport" id="viewport"><div class="frame" id="frame"><iframe id="demo" src="https://ticianapaura.github.io/checkout-ux-ui/" title="Checkout preview" tabindex="-1" aria-hidden="true"></iframe></div></div>
+      </div>
+      <div class="body">
+        <div class="top"><span class="mono">01 · fintech</span><span class="mono">desktop &amp; mobile</span></div>
         <h3>Hosted Checkout · Credit/Debit Card · White Label</h3>
-        <p>A hosted, 3-step card payment flow (method, amount, confirmation) that any merchant can re-skin with their own brand. Designed for desktop and mobile, with saved cards, CVV validation, design tokens and accessible focus handling between screens. Designed and coded end to end.</p>
-        <div class="tags"><span class="tag g">Fintech</span><span class="tag">Responsive</span><span class="tag">React</span><span class="tag">TypeScript</span><span class="tag">Design tokens</span></div>
+        <p>A hosted, 3-step card payment flow (method, amount, confirmation) that any merchant can re-skin with their own brand. Saved cards, CVV validation, design tokens and accessible focus handling. Designed and coded end to end.</p>
+        <div class="tags"><span class="tag g">Fintech</span><span class="tag">Responsive</span><span class="tag">React</span><span class="tag">TypeScript</span></div>
         <div class="links">
           <a href="https://ticianapaura.github.io/checkout-ux-ui/" target="_blank" rel="noopener">live demo ↗</a>
           <a href="https://github.com/ticianapaura/checkout-ux-ui" target="_blank" rel="noopener">front-end code ↗</a>
         </div>
       </div>
-      <div class="stage" aria-label="Animated preview of the checkout moving between screens and from desktop to mobile">
-        <div class="bar"><span class="rec">live preview</span><span class="w mono" id="vw">1366px · desktop</span></div>
-        <div class="viewport" id="viewport"><div class="frame" id="frame"><iframe id="demo" src="https://ticianapaura.github.io/checkout-ux-ui/" title="Checkout preview" tabindex="-1" aria-hidden="true"></iframe></div></div>
+    </article>
+
+    <article class="project">
+      <div class="stage">
+        <div class="bar"><span class="rec">live demo</span><span class="hint">tap send to play</span></div>
+        <div class="viewport"><div class="frame phone is-mobile" data-fit><iframe data-src="https://ticianapaura.github.io/tammy-ai-assistant/ai-conversation/#welcome" title="AI conversation with Tammy, playable demo"></iframe></div></div>
+      </div>
+      <div class="body">
+        <div class="top"><span class="mono">02 · AI assistant</span><span class="mono">mobile</span></div>
+        <h3>AI Conversation with Tammy · White Label</h3>
+        <p>The AI side of a white-label assistant: welcome and security notice, “Writing…”, answers with links, numbered quick replies, a 200-character limit and every error with its way out. Nine playable flows.</p>
+        <div class="tags"><span class="tag g">AI</span><span class="tag">White label</span><span class="tag">React</span><span class="tag">TypeScript</span></div>
+        <div class="links">
+          <a href="https://ticianapaura.github.io/tammy-ai-assistant/ai-conversation/" target="_blank" rel="noopener">live demo ↗</a>
+          <a href="https://github.com/ticianapaura/tammy-ai-assistant/tree/main/source/ai-conversation-with-tamy" target="_blank" rel="noopener">front-end code ↗</a>
+        </div>
       </div>
     </article>
 
+    <article class="project">
+      <div class="stage">
+        <div class="bar"><span class="rec">live demo</span><span class="hint">tap send to play</span></div>
+        <div class="viewport"><div class="frame phone is-mobile" data-fit><iframe data-src="https://ticianapaura.github.io/tammy-ai-assistant/live-agent/#handoff" title="Live agent handoff, playable demo"></iframe></div></div>
+      </div>
+      <div class="body">
+        <div class="top"><span class="mono">03 · AI assistant</span><span class="mono">mobile</span></div>
+        <h3>Live Agent Handoff · White Label</h3>
+        <p>When the AI can’t solve it, the chat moves to a person: connecting, agents busy, the conversation with the agent, end of session and a satisfaction survey. Nine playable flows, QA’d end to end with Playwright.</p>
+        <div class="tags"><span class="tag g">AI</span><span class="tag">Accessibility</span><span class="tag">React</span><span class="tag">Playwright</span></div>
+        <div class="links">
+          <a href="https://ticianapaura.github.io/tammy-ai-assistant/live-agent/" target="_blank" rel="noopener">live demo ↗</a>
+          <a href="https://github.com/ticianapaura/tammy-ai-assistant/tree/main/source/live-agent" target="_blank" rel="noopener">front-end code ↗</a>
+        </div>
+      </div>
+    </article>
+
+    </div>
   </div>
 </section>
 
@@ -178,8 +222,8 @@ document.getElementById('y').textContent=new Date().getFullYear();
   var DESK=1366, MOB=390, H=820;
   var vp=document.getElementById('viewport'), frame=document.getElementById('frame'), ifr=document.getElementById('demo'), lbl=document.getElementById('vw');
   var cur=DESK;
-  function k(){return Math.min(1,(vp.clientWidth-64-16)/DESK);}
-  function size(w){cur=w;var s=k();frame.style.width=(w*s+16)+'px';frame.style.height=(H*s+16)+'px';ifr.style.width=w+'px';ifr.style.height=H+'px';ifr.style.transform='scale('+s+')';frame.classList.toggle('is-mobile',w<700);lbl.textContent=w+'px · '+(w<700?'mobile':'desktop');}
+  function k(w){var cs=getComputedStyle(vp);var aw=vp.clientWidth-parseFloat(cs.paddingLeft)-parseFloat(cs.paddingRight)-12;var ah=vp.clientHeight-parseFloat(cs.paddingTop)-parseFloat(cs.paddingBottom)-12;return Math.min(aw/w,ah/H);}
+  function size(w){cur=w;var s=k(w);frame.style.width=(w*s+12)+'px';frame.style.height=(H*s+12)+'px';ifr.style.width=w+'px';ifr.style.height=H+'px';ifr.style.transform='scale('+s+')';frame.classList.toggle('is-mobile',w<700);lbl.textContent=w+'px · '+(w<700?'mobile':'desktop');}
   window.addEventListener('resize',function(){size(cur);});
   size(DESK);
   if(window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
@@ -208,6 +252,13 @@ document.getElementById('y').textContent=new Date().getFullYear();
     }
   }
   var started=false; new IntersectionObserver(function(e){if(e[0].isIntersecting&&!started){started=true;loop();}}).observe(vp);
+})();
+(function(){
+  var phones=[].slice.call(document.querySelectorAll('[data-fit]'));
+  function fit(){phones.forEach(function(f){var vp=f.parentNode,cs=getComputedStyle(vp);var aw=vp.clientWidth-parseFloat(cs.paddingLeft)-parseFloat(cs.paddingRight)-12;var ah=vp.clientHeight-parseFloat(cs.paddingTop)-parseFloat(cs.paddingBottom)-12;var s=Math.min(aw/390,ah/844);f.style.width=(390*s+12)+'px';f.style.height=(844*s+12)+'px';var i=f.querySelector('iframe');i.style.width='390px';i.style.height='844px';i.style.transform='scale('+s+')';});}
+  window.addEventListener('resize',fit);fit();
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){var i=e.target.querySelector('iframe');if(!i.src)i.src=i.dataset.src;io.unobserve(e.target);}});},{rootMargin:'300px'});
+  phones.forEach(function(f){io.observe(f);});
 })();
 </script>
 </body>
