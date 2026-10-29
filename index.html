@@ -69,10 +69,13 @@ h2::before{content:"// ";color:var(--blue)}
 .frame iframe{position:absolute;top:0;left:0;border:0;transform-origin:0 0;transition:transform 1.4s cubic-bezier(.65,0,.35,1)}
 .frame iframe{pointer-events:none}
 .phone{border-radius:24px;background:#222}
+.project.wide{grid-column:span 2}
+.project p b{color:var(--text);font-weight:600}
+.duo{gap:28px}
 .hint{font-family:"JetBrains Mono",monospace;font-size:11px;color:var(--muted)}
 :root{--stage-h:max(240px,33vh)}
 @media (max-width:1000px){.projects{grid-template-columns:repeat(2,minmax(0,1fr))}}
-@media (max-width:640px){.projects{grid-template-columns:1fr} :root{--stage-h:max(260px,40vh)}}
+@media (max-width:640px){.projects{grid-template-columns:1fr} .project.wide{grid-column:auto} .duo{gap:14px} :root{--stage-h:max(260px,40vh)}}
 .about{display:grid;grid-template-columns:1fr;gap:22px}
 .about p{color:var(--muted);font-size:17px;max-width:700px}
 .chips{display:flex;gap:10px;flex-wrap:wrap}
@@ -146,36 +149,23 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
       </div>
     </article>
 
-    <article class="project">
-      <div class="stage">
-        <div class="bar"><span class="rec">live preview</span><span class="hint">AI flow · autoplay</span></div>
-        <div class="viewport"><div class="frame phone is-mobile" data-fit><iframe data-src="https://ticianapaura.github.io/tammy-ai-assistant/ai-conversation/#welcome" title="AI conversation with Tammy preview" tabindex="-1" aria-hidden="true"></iframe></div></div>
-      </div>
-      <div class="body">
-        <div class="top"><span class="mono">02 · AI assistant</span><span class="mono">mobile</span></div>
-        <h3>AI Conversation with Tammy · White Label</h3>
-        <p>The AI side of a white-label assistant: welcome and security notice, “Writing…”, answers with links, numbered quick replies, a 200-character limit and every error with its way out. Nine playable flows.</p>
-        <div class="tags"><span class="tag g">AI</span><span class="tag">White label</span><span class="tag">React</span><span class="tag">TypeScript</span></div>
-        <div class="links">
-          <a href="https://ticianapaura.github.io/tammy-ai-assistant/ai-conversation/" target="_blank" rel="noopener">live demo ↗</a>
-          <a href="https://github.com/ticianapaura/tammy-ai-assistant/tree/main/source/ai-conversation-with-tamy" target="_blank" rel="noopener">front-end code ↗</a>
+    <article class="project wide">
+      <div class="stage" aria-label="The two features of the assistant playing on their own: the AI conversation and the handoff to a live agent">
+        <div class="bar"><span class="rec">live preview</span><span class="hint">AI conversation · live agent handoff</span></div>
+        <div class="viewport duo">
+          <div class="frame phone is-mobile" data-fit><iframe data-src="https://ticianapaura.github.io/tammy-ai-assistant/ai-conversation/#welcome" title="AI conversation preview" tabindex="-1" aria-hidden="true"></iframe></div>
+          <div class="frame phone is-mobile" data-fit><iframe data-src="https://ticianapaura.github.io/tammy-ai-assistant/live-agent/#handoff" title="Live agent handoff preview" tabindex="-1" aria-hidden="true"></iframe></div>
         </div>
       </div>
-    </article>
-
-    <article class="project">
-      <div class="stage">
-        <div class="bar"><span class="rec">live preview</span><span class="hint">agent handoff · autoplay</span></div>
-        <div class="viewport"><div class="frame phone is-mobile" data-fit><iframe data-src="https://ticianapaura.github.io/tammy-ai-assistant/live-agent/#handoff" title="Live agent handoff preview" tabindex="-1" aria-hidden="true"></iframe></div></div>
-      </div>
       <div class="body">
-        <div class="top"><span class="mono">03 · AI assistant</span><span class="mono">mobile</span></div>
-        <h3>Live Agent Handoff · White Label</h3>
-        <p>When the AI can’t solve it, the chat moves to a person: connecting, agents busy, the conversation with the agent, end of session and a satisfaction survey. Nine playable flows, QA’d end to end with Playwright.</p>
-        <div class="tags"><span class="tag g">AI</span><span class="tag">Accessibility</span><span class="tag">React</span><span class="tag">Playwright</span></div>
+        <div class="top"><span class="mono">02 · AI assistant</span><span class="mono">mobile · 2 features</span></div>
+        <h3>Tammy · AI Assistant · White Label</h3>
+        <p>A white-label assistant any merchant can rebrand with a name, an icon and four colors. Two features, built as working React apps: the <b>AI conversation</b> (quick replies, answers with links, a 200-character limit, every error with its way out) and the <b>handoff to a live agent</b> (connecting, agents busy, end of session and a satisfaction survey). Eighteen playable flows, QA’d end to end with Playwright.</p>
+        <div class="tags"><span class="tag g">AI</span><span class="tag">White label</span><span class="tag">Design system</span><span class="tag">React</span><span class="tag">Playwright</span></div>
         <div class="links">
-          <a href="https://ticianapaura.github.io/tammy-ai-assistant/live-agent/" target="_blank" rel="noopener">live demo ↗</a>
-          <a href="https://github.com/ticianapaura/tammy-ai-assistant/tree/main/source/live-agent" target="_blank" rel="noopener">front-end code ↗</a>
+          <a href="https://ticianapaura.github.io/tammy-ai-assistant/ai-conversation/" target="_blank" rel="noopener">AI chat demo ↗</a>
+          <a href="https://ticianapaura.github.io/tammy-ai-assistant/live-agent/" target="_blank" rel="noopener">live agent demo ↗</a>
+          <a href="https://github.com/ticianapaura/tammy-ai-assistant" target="_blank" rel="noopener">front-end code ↗</a>
         </div>
       </div>
     </article>
@@ -265,7 +255,7 @@ document.getElementById('y').textContent=new Date().getFullYear();
 })();
 (function(){
   var phones=[].slice.call(document.querySelectorAll('[data-fit]'));
-  function fit(){phones.forEach(function(f){var vp=f.parentNode,cs=getComputedStyle(vp);var aw=vp.clientWidth-parseFloat(cs.paddingLeft)-parseFloat(cs.paddingRight)-12;var ah=vp.clientHeight-parseFloat(cs.paddingTop)-parseFloat(cs.paddingBottom)-12;var s=Math.min(aw/390,ah/844);f.style.width=(390*s+12)+'px';f.style.height=(844*s+12)+'px';var i=f.querySelector('iframe');i.style.width='390px';i.style.height='844px';i.style.transform='scale('+s+')';});}
+  function fit(){phones.forEach(function(f){var vp=f.parentNode,cs=getComputedStyle(vp),n=vp.querySelectorAll('[data-fit]').length,gap=parseFloat(cs.columnGap)||0;var aw=(vp.clientWidth-parseFloat(cs.paddingLeft)-parseFloat(cs.paddingRight)-gap*(n-1))/n-12;var ah=vp.clientHeight-parseFloat(cs.paddingTop)-parseFloat(cs.paddingBottom)-12;var s=Math.min(aw/390,ah/844);f.style.width=(390*s+12)+'px';f.style.height=(844*s+12)+'px';var i=f.querySelector('iframe');i.style.width='390px';i.style.height='844px';i.style.transform='scale('+s+')';});}
   window.addEventListener('resize',fit);fit();
   var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var wait=function(ms){return new Promise(function(r){setTimeout(r,ms);});};
