@@ -73,10 +73,12 @@ h2::before{content:"// ";color:var(--blue)}
 .phone{border-radius:12px;background:#222}
 .project.wide{grid-column:span 2;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px}
 .project .col{display:flex;flex-direction:column;gap:18px;min-width:0}
+.project.full{grid-column:1/-1;display:grid;grid-template-columns:minmax(0,1.6fr) minmax(0,1fr);gap:24px}
+.project.full .viewport{height:calc(var(--stage-h) + 60px)}
 .hint{font-family:"JetBrains Mono",monospace;font-size:11px;color:var(--muted)}
 :root{--stage-h:max(240px,33vh)}
 @media (max-width:1000px){.projects{grid-template-columns:repeat(2,minmax(0,1fr))}}
-@media (max-width:640px){.projects{grid-template-columns:1fr} .project.wide{grid-column:auto;grid-template-columns:1fr} :root{--stage-h:max(260px,40vh)}}
+@media (max-width:640px){.projects{grid-template-columns:1fr} .project.wide{grid-column:auto;grid-template-columns:1fr} .project.full{grid-template-columns:1fr} :root{--stage-h:max(260px,40vh)}}
 .about{display:grid;grid-template-columns:1fr;gap:22px}
 .about p{color:var(--muted);font-size:17px;max-width:700px}
 .chips{display:flex;gap:10px;flex-wrap:wrap}
@@ -185,6 +187,23 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
       </div>
     </article>
 
+    <article class="project full">
+      <div class="stage">
+        <div class="bar"><span class="rec">live preview</span><span class="hint">booking flow · autoplay</span></div>
+        <div class="viewport"><div class="frame" data-desk><iframe data-src="https://ticianapaura.github.io/latam-cargo-booking/?embed=1" title="LATAM Cargo booking flow preview" tabindex="-1" aria-hidden="true"></iframe></div></div>
+      </div>
+      <div class="body">
+        <div class="top"><span class="mono">03 · logistics</span><span class="mono">desktop</span></div>
+        <h3>LATAM Cargo · New Booking Flow</h3>
+        <p>A five-step air cargo booking, from cargo type to live tracking on a map. Sixteen playable flows from one index: the happy path, inline errors on every step, interruptions like an expired session, tracking exceptions and search. Screens generated from the design canvas into React components.</p>
+        <div class="tags"><span class="tag g">Logistics</span><span class="tag">Edge cases</span><span class="tag">React</span><span class="tag">TypeScript</span></div>
+        <div class="links">
+          <a href="https://ticianapaura.github.io/latam-cargo-booking/" target="_blank" rel="noopener">live demo ↗</a>
+          <a href="https://github.com/ticianapaura/latam-cargo-booking" target="_blank" rel="noopener">front-end code ↗</a>
+        </div>
+      </div>
+    </article>
+
     </div>
   </div>
 </section>
@@ -267,6 +286,13 @@ document.getElementById('y').textContent=new Date().getFullYear();
     }
   }
   var started=false; new IntersectionObserver(function(e){if(e[0].isIntersecting&&!started){started=true;loop();}}).observe(vp);
+})();
+(function(){
+  // Desktop previews: a 1400px-wide app scaled into the card, loaded once the card is on screen.
+  var W=1400,H=875,frames=[].slice.call(document.querySelectorAll('[data-desk]'));
+  function fit(){frames.forEach(function(f){var vp=f.parentNode,cs=getComputedStyle(vp);var aw=vp.clientWidth-parseFloat(cs.paddingLeft)-parseFloat(cs.paddingRight)-12;var ah=vp.clientHeight-parseFloat(cs.paddingTop)-parseFloat(cs.paddingBottom)-12;var s=Math.min(aw/W,ah/H);f.style.width=(W*s+12)+'px';f.style.height=(H*s+12)+'px';var i=f.querySelector('iframe');i.style.width=W+'px';i.style.height=H+'px';i.style.transform='scale('+s+')';});}
+  window.addEventListener('resize',fit);fit();
+  frames.forEach(function(f){var i=f.querySelector('iframe');new IntersectionObserver(function(e,o){if(e[0].isIntersecting){i.addEventListener('load',function(){window.__noScrollFocus(i);});i.src=i.getAttribute('data-src');o.disconnect();}}).observe(f);});
 })();
 (function(){
   var phones=[].slice.call(document.querySelectorAll('[data-fit]'));
