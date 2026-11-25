@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Orbita Pay · Agent-assisted merchant onboarding</title>
+<meta name="description" content="Interactive prototype: a merchant onboarding where an AI assistant prepares, the system checks and the merchant decides.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#FAFAFA;color:#16161D;font:16px/24px 'Source Sans 3','Source Sans Pro',system-ui,sans-serif}
+header{background:#5A28FF;color:#fff}
+.in{max-width:1040px;margin:0 auto;padding:0 24px}
+header .in{min-height:48px;display:flex;align-items:center;gap:10px;font-size:22px;font-weight:700}
+.hero{padding:48px 0 24px}
+.eyebrow{font-size:12px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:#5C5C68;margin:0}
+h1{margin:8px 0 12px;font-size:36px;line-height:42px}
+.lead{max-width:720px;color:#3A3A44;margin:0}
+.lead b{color:#4A1FD6}
+.note{margin-top:16px;display:inline-block;font-size:14px;padding:6px 12px;border-radius:999px;background:#F2F3FF;color:#4A1FD6;font-weight:600}
+.links{margin-top:20px;display:flex;flex-wrap:wrap;gap:12px}
+.links a{display:inline-flex;align-items:center;min-height:44px;padding:0 22px;border-radius:999px;border:2px solid #4A1FD6;color:#16161D;text-decoration:none;font-weight:600}
+.links a.p,.play{background:#5A28FF;border-color:#5A28FF;color:#fff}
+.links a:hover{background:#F2F3FF} .links a.p:hover,.play:hover{background:#4A1FD6}
+section{background:#fff;border-radius:6px;box-shadow:0 2px 12px rgba(22,22,29,.08);padding:28px 32px;margin:24px 0}
+.sh{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-start;gap:12px 24px;padding-bottom:12px;border-bottom:3px solid #16161D}
+h2{margin:0;font-size:22px;line-height:28px}
+.sh p{margin:4px 0 0;color:#5C5C68;font-size:15px}
+.play{display:inline-flex;align-items:center;min-height:44px;padding:0 22px;border-radius:999px;text-decoration:none;font-weight:600}
+ol{list-style:none;margin:0;padding:0}
+li a{display:flex;flex-wrap:wrap;gap:4px 16px;align-items:baseline;padding:14px 4px;border-bottom:1px solid #E4E4EA;color:#16161D;text-decoration:none}
+li:last-child a{border-bottom:0}
+li a:hover .t{color:#4A1FD6;text-decoration:underline}
+li a:focus-visible{outline:2px solid #5A28FF;outline-offset:2px;border-radius:4px}
+.t{font-weight:600} .d{color:#5C5C68;font-size:15px}
+footer{color:#5C5C68;font-size:14px;padding:8px 0 48px}
+</style>
+</head>
+<body>
+<header><div class="in"><svg aria-hidden="true" width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="#FFFFFF" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><path d="M11 3v16"/></svg>Orbita Pay</div></header>
+<main class="in">
+<div class="hero">
+<p class="eyebrow">Interactive prototype · Agentic AI UX · Human-in-the-loop</p>
+<h1>Agent-assisted merchant onboarding</h1>
+<p class="lead">A five-step merchant application where an AI assistant works beside the form. <b>The agent assists. The human decides.</b> The assistant prepares drafts and proposals, the system checks them, and the merchant confirms every one. Legal declarations, bank details and final submission always stay with the merchant.</p>
+<span class="note">Simulated assistant: no AI model is connected. Orbita Pay is a fictional brand.</span>
+<div class="links"><a class="p" href="Main.html">Start the prototype</a><a href="Flow.html">See the agent help flow</a><a href="https://github.com/ticianapaura/ticianapaura.github.io/tree/main/orbita-pay">Front-end code</a></div>
+</div>
+<section><div class="sh"><div><h2>Happy path</h2><p>Working with the assistant, from choosing how to work to the submitted application.</p></div><a class="play" href="Main.html">Play the happy path</a></div><ol><li><a href="Main.html"><span class="t">1 Start</span></a></li><li><a href="Step1.html"><span class="t">2 Business Information: confirm drafts</span></a></li><li><a href="Step2.html"><span class="t">3 Account Information: approve proposal</span></a></li><li><a href="Step3.html"><span class="t">4 Ownership Information: yours, checked</span></a></li><li><a href="Step4.html"><span class="t">5 Banking Information: yours, checked</span></a></li><li><a href="Step5.html"><span class="t">6 Review &amp; Submit: you authorise</span></a></li><li><a href="Submitted.html"><span class="t">7 Submitted: status and next steps</span></a></li></ol></section>
+<section><div class="sh"><div><h2>Validation errors, tool failure and recovery</h2><p>Scenarios A and B.</p></div></div><ol><li><a href="A1.html"><span class="t">A1 Inconsistent business address</span></a></li><li><a href="A2.html"><span class="t">A2 Invalid MCC currency configuration</span></a></li><li><a href="A3.html"><span class="t">A3 Missing ownership information</span></a></li><li><a href="B1.html"><span class="t">B1 Validation timed out: retry available</span></a></li><li><a href="B2.html"><span class="t">B2 Validation unavailable: escalate or continue</span></a></li></ol></section>
+<section><div class="sh"><div><h2>Handoff in both directions, approval invalidation</h2><p>Scenarios C and D.</p></div></div><ol><li><a href="C1.html"><span class="t">C1 Manual to assistant: choose what to hand over</span></a></li><li><a href="C2.html"><span class="t">C2 Assistant to manual: edit, then resume</span></a></li><li><a href="D1.html"><span class="t">D1 Approval invalidated: v2 and bank mismatch</span></a></li><li><a href="D2.html"><span class="t">D2 Review &amp; Submit: not ready</span></a></li></ol></section>
+<section><div class="sh"><div><h2>Human escalation and submission recovery</h2><p>Scenarios E and F.</p></div></div><ol><li><a href="E1.html"><span class="t">E1 Human escalation: confirm the handoff</span></a></li><li><a href="E3.html"><span class="t">E3 Human escalation: awaiting review</span></a></li><li><a href="F1.html"><span class="t">F1 Submission status unknown</span></a></li><li><a href="F2.html"><span class="t">F2 Not received: safe retry</span></a></li></ol></section>
+<section><div class="sh"><div><h2>Reviewer tools</h2><p>Not part of the merchant interface: they help a reviewer load scenarios and play the human specialist.</p></div></div><ol><li><a href="Lab.html"><span class="t">Scenario Lab drawer (reviewer tool)</span></a></li><li><a href="E2.html"><span class="t">E2 Simulated specialist view (reviewer tool)</span></a></li></ol></section>
+<footer>Designed by Ticiana Paura as an agent, user and system experience, and built as an AI-assisted front end.</footer>
+</main>
+</body>
+</html>

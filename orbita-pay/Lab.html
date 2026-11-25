@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Scenario Lab: reviewer tool · Orbita Pay prototype</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:#4A1FD6}a:hover{color:#3413A8}
+.sw{appearance:none;-webkit-appearance:none;flex:none;width:44px;height:24px;border-radius:999px;background:#8A8A96;position:relative;margin:0}
+.sw::after{content:"";position:absolute;left:3px;top:3px;width:18px;height:18px;border-radius:50%;background:#fff}
+.sw:checked{background:#5A28FF}.sw:checked::after{left:23px}
+</style>
+<style>
+.op-bar{position:sticky;top:0;z-index:50;display:flex;align-items:center;gap:12px;padding:10px 20px;background:#16161D;color:#fff;font:600 14px/20px 'Source Sans 3','Source Sans Pro',system-ui,sans-serif}
+.op-bar a{display:inline-flex;align-items:center;gap:6px;min-height:36px;padding:0 14px 0 10px;border:1px solid #4A4A55;border-radius:999px;color:#fff;text-decoration:none}
+.op-bar a:hover{border-color:#B9A8FF;color:#fff}
+.op-bar a:focus-visible{outline:2px solid #B9A8FF;outline-offset:2px}
+.op-bar span{color:#C9C9D2;font-weight:400;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.op-embed .op-bar{display:none}
+</style>
+</head>
+<body data-page="Lab">
+<nav class="op-bar" aria-label="Prototype navigation"><a href="index.html"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>All flows</a><span>Scenario Lab drawer (reviewer tool)</span></nav>
+<div style="width: 560px; height: 1080px; box-sizing: border-box; padding: 32px; background: #1F2430; color: #F4F5F7; font-family: ui-monospace, Menlo, Consolas, monospace; font-size: 14px; line-height: 22px; display: flex; flex-direction: column; gap: 20px">
+<div><div style="font-size: 12px; letter-spacing: 1px; text-transform: uppercase; color: #FFD479">Reviewer tool. Not part of the merchant interface.</div><h1 style="margin: 8px 0 0; font-size: 22px; line-height: 28px">Scenario Lab</h1><div style="color: #D6DAE3; margin-top: 4px">Opened from a small Demo control in the page corner. Loading a scenario sets synthetic data and the starting state. You carry out the scenario yourself; nothing is marked complete for you.</div></div>
+<ol style="list-style: none; margin: 0; padding: 0">
+<li style="display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 6px 0; border-top: 1px solid #3A4152"><span>1. Address inconsistency <span style="color: #B7BDCB">(Step 1)</span></span><button type="button" style="min-height: 44px; padding: 0 16px; border-radius: 4px; font: inherit; font-weight: 700; cursor: pointer; background: transparent; color: #F4F5F7; border: 1px solid #F4F5F7">Load</button></li>
+<li style="display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 6px 0; border-top: 1px solid #3A4152"><span>2. MCC settlement currency limit <span style="color: #B7BDCB">(Step 2)</span></span><button type="button" style="min-height: 44px; padding: 0 16px; border-radius: 4px; font: inherit; font-weight: 700; cursor: pointer; background: transparent; color: #F4F5F7; border: 1px solid #F4F5F7">Load</button></li>
+<li style="display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 6px 0; border-top: 1px solid #3A4152"><span>3. Missing ownership information <span style="color: #B7BDCB">(Step 3)</span></span><button type="button" style="min-height: 44px; padding: 0 16px; border-radius: 4px; font: inherit; font-weight: 700; cursor: pointer; background: transparent; color: #F4F5F7; border: 1px solid #F4F5F7">Load</button></li>
+<li style="display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 6px 0; border-top: 1px solid #3A4152"><span>4. Validation tool timeout <span style="color: #B7BDCB">(Step 2)</span></span><button type="button" style="min-height: 44px; padding: 0 16px; border-radius: 4px; font: inherit; font-weight: 700; cursor: pointer; background: transparent; color: #F4F5F7; border: 1px solid #F4F5F7">Load</button></li>
+<li style="display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 6px 0; border-top: 1px solid #3A4152"><span>5. Persistent validation failure <span style="color: #B7BDCB">(Step 2)</span></span><button type="button" style="min-height: 44px; padding: 0 16px; border-radius: 4px; font: inherit; font-weight: 700; cursor: pointer; background: transparent; color: #F4F5F7; border: 1px solid #F4F5F7">Load</button></li>
+<li style="display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 6px 0; border-top: 1px solid #3A4152"><span>6. Manual to assistant handoff <span style="color: #B7BDCB">(Step 1)</span></span><button type="button" style="min-height: 44px; padding: 0 16px; border-radius: 4px; font: inherit; font-weight: 700; cursor: pointer; background: transparent; color: #F4F5F7; border: 1px solid #F4F5F7">Load</button></li>
+<li style="display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 6px 0; border-top: 1px solid #3A4152"><span>7. Assistant to manual handoff <span style="color: #B7BDCB">(Step 2)</span></span><button type="button" style="min-height: 44px; padding: 0 16px; border-radius: 4px; font: inherit; font-weight: 700; cursor: pointer; background: transparent; color: #F4F5F7; border: 1px solid #F4F5F7">Load</button></li>
+<li style="display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 6px 0; border-top: 1px solid #3A4152"><span>8. Approval invalidation <span style="color: #B7BDCB">(Step 2)</span></span><button type="button" style="min-height: 44px; padding: 0 16px; border-radius: 4px; font: inherit; font-weight: 700; cursor: pointer; background: transparent; color: #F4F5F7; border: 1px solid #F4F5F7">Load</button></li>
+<li style="display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 6px 0; border-top: 1px solid #3A4152"><span>9. Human escalation <span style="color: #B7BDCB">(Step 4)</span></span><button type="button" style="min-height: 44px; padding: 0 16px; border-radius: 4px; font: inherit; font-weight: 700; cursor: pointer; background: transparent; color: #F4F5F7; border: 1px solid #F4F5F7">Load</button></li>
+<li style="display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 6px 0; border-top: 1px solid #3A4152"><span>10. Submission status unknown <span style="color: #B7BDCB">(Step 5)</span></span><button type="button" style="min-height: 44px; padding: 0 16px; border-radius: 4px; font: inherit; font-weight: 700; cursor: pointer; background: transparent; color: #F4F5F7; border: 1px solid #F4F5F7">Load</button></li>
+<li style="display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 6px 0; border-top: 1px solid #3A4152"><span>11. Successful submission recovery <span style="color: #B7BDCB">(Step 5)</span></span><button type="button" style="min-height: 44px; padding: 0 16px; border-radius: 4px; font: inherit; font-weight: 700; cursor: pointer; background: transparent; color: #F4F5F7; border: 1px solid #F4F5F7">Load</button></li>
+<li style="display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 6px 0; border-top: 1px solid #3A4152"><span>12. Safe submission retry <span style="color: #B7BDCB">(Step 5)</span></span><button type="button" style="min-height: 44px; padding: 0 16px; border-radius: 4px; font: inherit; font-weight: 700; cursor: pointer; background: transparent; color: #F4F5F7; border: 1px solid #F4F5F7">Load</button></li>
+</ol>
+<div style="display: flex; flex-wrap: wrap; gap: 12px"><button type="button" style="min-height: 44px; padding: 0 16px; border-radius: 4px; font: inherit; font-weight: 700; cursor: pointer; background: #F4F5F7; color: #1F2430; border: 1px solid #F4F5F7">Reset application</button><button type="button" style="min-height: 44px; padding: 0 16px; border-radius: 4px; font: inherit; font-weight: 700; cursor: pointer; background: transparent; color: #F4F5F7; border: 1px solid #F4F5F7">Open specialist view</button></div>
+</div>
+<script>
+(function(){
+  var q=new URLSearchParams(location.search), embed=q.has('embed'), tour=q.has('tour');
+  if(embed) document.documentElement.classList.add('op-embed');
+  var keep=embed?('?'+q.toString()):'';
+  // Keep embed/tour mode on every link inside the prototype.
+  if(keep) document.querySelectorAll('a[href$=".html"]').forEach(function(a){a.setAttribute('href',a.getAttribute('href')+keep);});
+  // Scenario Lab: each "Load" opens that scenario's first screen.
+  var lab=["A1", "A2", "A3", "B1", "B2", "C1", "C2", "D1", "E1", "F1", "Submitted", "F2"]; if(document.body.dataset.page==='Lab'){var loads=[].filter.call(document.querySelectorAll('button'),function(b){return /^Load$/.test(b.textContent.trim());});
+    loads.forEach(function(b,i){if(lab[i])b.addEventListener('click',function(){location.href=lab[i]+'.html'+keep;});});
+    [].forEach.call(document.querySelectorAll('button'),function(b){var t=b.textContent.trim();if(t==='Reset application')b.addEventListener('click',function(){location.href='Main.html'+keep;});if(t==='Open specialist view')b.addEventListener('click',function(){location.href='E2.html'+keep;});});}
+  // Tour (portfolio preview): scroll through each happy-path screen, then move to the next one.
+  var happy=["Main", "Step1", "Step2", "Step3", "Step4", "Step5", "Submitted"], i=happy.indexOf(document.body.dataset.page);
+  if(tour&&i>-1&&!matchMedia('(prefers-reduced-motion: reduce)').matches){
+    var start=null,dur=5200,max=function(){return Math.max(0,document.documentElement.scrollHeight-innerHeight);};
+    setTimeout(function(){requestAnimationFrame(function step(t){if(start===null)start=t;var p=Math.min(1,(t-start)/dur);var e=p<.5?2*p*p:1-Math.pow(-2*p+2,2)/2;window.scrollTo(0,max()*e);if(p<1)requestAnimationFrame(step);else setTimeout(function(){location.href=happy[(i+1)%happy.length]+'.html'+keep;},900);});},1100);
+  }
+})();
+</script>
+</body>
+</html>
