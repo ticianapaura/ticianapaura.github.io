@@ -491,5 +491,21 @@ document.getElementById('y').textContent=new Date().getFullYear();
   phones.forEach(function(f){io.observe(f);});
 })();
 </script>
+<canvas id="stars" aria-hidden="true" style="position:fixed;inset:0;width:100%;height:100%;z-index:50;pointer-events:none"></canvas>
+<script>
+/* Tiny star particles */
+(function(){
+  var c=document.getElementById('stars'),x=c.getContext('2d'),dpr=Math.min(window.devicePixelRatio||1,2),W,H,S=[];
+  var cols=['255,255,255','255,255,255','255,255,255','242,138,200','180,140,255'];
+  var still=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function size(){W=innerWidth;H=innerHeight;c.width=W*dpr;c.height=H*dpr;x.setTransform(dpr,0,0,dpr,0,0);
+    var n=Math.round(W*H/7000);S=[];for(var i=0;i<n;i++)S.push({x:Math.random()*W,y:Math.random()*H,r:Math.random()<.88?.4+Math.random()*.5:.9+Math.random()*.5,v:.04+Math.random()*.14,a:.25+Math.random()*.6,p:Math.random()*6.28,w:.6+Math.random()*1.6,c:cols[Math.random()*cols.length|0]});}
+  function draw(t){x.clearRect(0,0,W,H);for(var i=0;i<S.length;i++){var s=S[i];
+    if(!still){s.y-=s.v;if(s.y<-2){s.y=H+2;s.x=Math.random()*W;}}
+    var o=s.a*(still?1:.55+.45*Math.sin(t/1000*s.w+s.p));x.fillStyle='rgba('+s.c+','+o.toFixed(3)+')';x.beginPath();x.arc(s.x,s.y,s.r,0,6.283);x.fill();}
+    if(!still)requestAnimationFrame(draw);}
+  size();addEventListener('resize',function(){size();if(still)draw(0);});requestAnimationFrame(draw);
+})();
+</script>
 </body>
 </html>
