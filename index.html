@@ -344,7 +344,8 @@ document.getElementById('y').textContent=new Date().getFullYear();
   window.__noScrollFocus=function(i){try{var w=i.contentWindow,P=w.HTMLElement.prototype,f=P.focus;if(P.__patched)return;P.focus=function(o){return f.call(this,Object.assign({},o||{},{preventScroll:true}));};P.__patched=true;}catch(e){}};
   var lastY=window.scrollY,userAt=0;
   ['wheel','touchstart','touchmove','keydown','mousedown','pointerdown'].forEach(function(t){window.addEventListener(t,function(){userAt=Date.now();},{passive:true});});
-  window.addEventListener('scroll',function(){if(Date.now()-userAt<2000){lastY=window.scrollY;}else if(Math.abs(window.scrollY-lastY)>2){window.scrollTo({top:lastY,behavior:'instant'});}},{passive:true});
+  // Only undo a jump caused by a demo preview taking focus (iframes can't be clicked, so focus there is never the visitor's); any other scroll is the visitor's and is kept.
+  window.addEventListener('scroll',function(){var a=document.activeElement,fromDemo=a&&a.tagName==='IFRAME'&&Date.now()-userAt>2000;if(fromDemo&&Math.abs(window.scrollY-lastY)>2){window.scrollTo({top:lastY,behavior:'instant'});}else{lastY=window.scrollY;}},{passive:true});
   document.querySelectorAll('iframe').forEach(function(i){i.addEventListener('load',function(){window.__noScrollFocus(i);});});
   window.__visible=function(el){var r=el.getBoundingClientRect();return r.bottom>0&&r.top<window.innerHeight;};
 })();
