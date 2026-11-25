@@ -347,11 +347,18 @@ document.getElementById('y').textContent=new Date().getFullYear();
 })();
 (function(){
   // The demos inside the cards focus their own inputs; never let that move the page.
-  window.__noScrollFocus=function(i){try{var w=i.contentWindow,P=w.HTMLElement.prototype,E=w.Element.prototype,f=P.focus,v=E.scrollIntoView;if(P.__patched)return;
+  // Previews must never move this page. Inside each preview, focus() never scrolls, and scrollIntoView() only scrolls the preview's own
+  // scroll boxes (it is rewritten so it can't reach this page). Patched as early as possible, and again after every reload.
+  window.__noScrollFocus=function(i){try{var w=i.contentWindow,d=w.document,P=w.HTMLElement.prototype,E=w.Element.prototype,f=P.focus;if(!d||P.__patched)return;
     P.focus=function(o){return f.call(this,Object.assign({},o||{},{preventScroll:true}));};
-    // scrollIntoView inside a preview would also scroll this page: run it instantly and put the page back where it was.
-    E.scrollIntoView=function(o){var x=window.scrollX,y=window.scrollY,opt=(o&&typeof o==='object')?Object.assign({},o,{behavior:'instant'}):{block:o===false?'end':'start',behavior:'instant'};v.call(this,opt);if(window.scrollX!==x||window.scrollY!==y)window.scrollTo({left:x,top:y,behavior:'instant'});for(var el=i.parentElement;el;el=el.parentElement){if(el.scrollTop)el.scrollTop=0;if(el.scrollLeft)el.scrollLeft=0;}};
+    E.scrollIntoView=function(o){var block=(o&&typeof o==='object'&&o.block)||(o===false?'end':'start');var el=this,r=el.getBoundingClientRect();
+      for(var a=el.parentElement;a;a=a.parentElement){var cs=w.getComputedStyle(a),sc=/(auto|scroll)/.test(cs.overflowY)&&a.scrollHeight>a.clientHeight;
+        if(sc||a===d.scrollingElement){var ar=a===d.scrollingElement?{top:0,bottom:w.innerHeight}:a.getBoundingClientRect(),dy;
+          if(block==='end')dy=r.bottom-ar.bottom;else if(block==='center')dy=(r.top+r.bottom)/2-(ar.top+ar.bottom)/2;else if(block==='nearest')dy=r.top<ar.top?r.top-ar.top:(r.bottom>ar.bottom?r.bottom-ar.bottom:0);else dy=r.top-ar.top;
+          a.scrollTop+=dy;r=el.getBoundingClientRect();if(a===d.scrollingElement)break;}}};
+    E.scrollIntoViewIfNeeded=function(){E.scrollIntoView.call(this,{block:'nearest'});};
     P.__patched=true;}catch(e){}};
+  (function watch(){document.querySelectorAll('iframe').forEach(window.__noScrollFocus);requestAnimationFrame(watch);})();
   // Previews can't move this page: focus and scrollIntoView inside them are patched above, so no scroll guard is needed.
   document.querySelectorAll('iframe').forEach(function(i){i.addEventListener('load',function(){window.__noScrollFocus(i);});});
   window.__visible=function(el){var r=el.getBoundingClientRect();return r.bottom>0&&r.top<window.innerHeight;};
