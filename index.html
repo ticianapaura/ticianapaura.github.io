@@ -339,6 +339,12 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;
 
 <script>
 document.getElementById('y').textContent=new Date().getFullYear();
+// Land in a predictable place: the section in the address (#about, #contact) or the top, once fonts and layout have settled.
+(function(){try{history.scrollRestoration='manual';}catch(e){}
+  function land(){var t=location.hash&&document.getElementById(location.hash.slice(1));if(t){t.scrollIntoView({block:'start',behavior:'instant'});}else{window.scrollTo({top:0,behavior:'instant'});}}
+  var go=function(){(document.fonts&&document.fonts.ready?document.fonts.ready:Promise.resolve()).then(function(){requestAnimationFrame(land);});};
+  if(document.readyState==='complete')go();else window.addEventListener('load',go,{once:true});
+})();
 (function(){
   // The demos inside the cards focus their own inputs; never let that move the page.
   window.__noScrollFocus=function(i){try{var w=i.contentWindow,P=w.HTMLElement.prototype,E=w.Element.prototype,f=P.focus,v=E.scrollIntoView;if(P.__patched)return;
