@@ -343,7 +343,7 @@ document.getElementById('y').textContent=new Date().getFullYear();
 (function(){try{history.scrollRestoration='manual';}catch(e){}
   function land(){var t=location.hash&&document.getElementById(location.hash.slice(1));if(t){t.scrollIntoView({block:'start',behavior:'instant'});}else{window.scrollTo({top:0,behavior:'instant'});}}
   var go=function(){(document.fonts&&document.fonts.ready?document.fonts.ready:Promise.resolve()).then(function(){requestAnimationFrame(land);});};
-  if(document.readyState==='complete')go();else window.addEventListener('load',go,{once:true});
+  go();
 })();
 (function(){
   // The demos inside the cards focus their own inputs; never let that move the page.
