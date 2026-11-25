@@ -38,15 +38,6 @@ a:hover{color:#E6D2B4}
 @media (prefers-reduced-motion:reduce){.glow{animation:none}}
 
 /* Nav */
-nav{position:sticky;top:0;z-index:10;background:rgba(13,15,18,.82);backdrop-filter:blur(10px);border-bottom:1px solid rgba(58,64,74,.6)}
-nav .wrap{display:flex;justify-content:flex-end;align-items:center;min-height:68px;gap:16px}
-.brand{display:flex;align-items:center;gap:12px;color:var(--text);text-decoration:none}
-.brand:hover{color:#fff}
-.brand img{width:36px;height:36px;border-radius:50%;object-fit:cover;border:1px solid var(--line)}
-.brand span{font-family:var(--serif);font-size:20px;font-weight:500;letter-spacing:-.01em}
-nav ul{display:flex;gap:28px;list-style:none;align-items:center}
-nav ul a{font-size:15px;color:var(--text-2);text-decoration:none;padding:12px 0}
-nav ul a:hover{color:#fff}
 
 /* Hero */
 .hero{position:relative;overflow:hidden;padding:clamp(56px,8vw,112px) 0 clamp(64px,8vw,112px)}
@@ -120,7 +111,7 @@ h2{font-family:var(--serif);font-weight:500;font-size:clamp(32px,4.2vw,58px);lin
 .showcase{position:relative;overflow:hidden;padding:40px 0 clamp(64px,8vw,112px)}
 .showcase>.wrap{position:relative}
 .showcase-grid{display:grid;grid-template-columns:300px minmax(0,1fr);gap:clamp(32px,4vw,56px);align-items:start}
-.profile{position:sticky;top:96px;display:flex;flex-direction:column;gap:18px}
+.profile{position:sticky;top:32px;display:flex;flex-direction:column;gap:18px}
 .profile .avatar{width:132px;height:132px;border-radius:50%;object-fit:cover;border:1px solid var(--line);box-shadow:0 24px 48px -20px rgba(0,0,0,.8)}
 .profile h1{font-family:var(--serif);font-weight:500;font-size:34px;line-height:1.1;letter-spacing:-.01em}
 .profile .role{font-size:16px;color:var(--text-2);margin-top:4px}
@@ -146,6 +137,13 @@ h2{font-family:var(--serif);font-weight:500;font-size:clamp(32px,4.2vw,58px);lin
 .shelf .links a{min-height:40px;padding:0 14px;font-size:13px}
 @media (max-width:1000px){.showcase-grid{grid-template-columns:1fr}.profile{position:static;display:grid;grid-template-columns:auto 1fr;column-gap:20px;align-items:center}.profile>*{grid-column:1/-1}.profile .avatar{grid-column:1;width:88px;height:88px}.profile>div:first-of-type{grid-column:2}.profile .btn.primary{width:auto;justify-self:start}}
 @media (max-width:640px){.shelf .projects{grid-template-columns:1fr}.project.wide{grid-column:auto}}
+
+/* Section tabs inside the main column (Behance-style), not sticky */
+.tabs{border-bottom:1px solid var(--line)}
+.tabs ul{display:flex;gap:32px;list-style:none;flex-wrap:wrap}
+.tabs a{display:inline-flex;align-items:center;min-height:48px;font-size:16px;font-weight:500;color:var(--text-2);text-decoration:none;border-bottom:2px solid transparent;margin-bottom:-1px}
+.tabs a:hover{color:#fff}
+.tabs a[aria-current="page"]{color:#fff;border-bottom-color:var(--accent)}
 
 /* About: light section, as on ticianapaura.com */
 #about{background:var(--cream);color:var(--cream-ink);overflow:hidden}
@@ -174,20 +172,11 @@ h2{font-family:var(--serif);font-weight:500;font-size:clamp(32px,4.2vw,58px);lin
 
 footer{padding:28px 0;color:var(--faint);font-size:13px;border-top:1px solid rgba(58,64,74,.6)}
 footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;font-family:var(--mono)}
-@media (max-width:720px){nav ul{gap:18px} nav ul li.hide-sm{display:none} .brand span{font-size:18px}}
+
 </style>
 </head>
 <body>
 
-<nav aria-label="Main">
-  <div class="wrap">
-    <ul>
-      <li><a href="#work">Work</a></li>
-      <li><a href="#about">About</a></li>
-      <li class="hide-sm"><a href="#contact">Contact</a></li>
-    </ul>
-  </div>
-</nav>
 
 <main id="work" class="showcase">
   <div class="glow" aria-hidden="true"></div>
@@ -216,6 +205,13 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;
     </aside>
 
     <div class="shelf">
+      <nav class="tabs" aria-label="Sections">
+        <ul>
+          <li><a href="#work" aria-current="page">Work</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
       <div class="shelf-head">
         <p class="eyebrow">Projects</p>
         <h2>From design <span>to working experiences.</span></h2>
