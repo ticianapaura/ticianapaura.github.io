@@ -40,7 +40,7 @@ a:hover{color:#E6D2B4}
 /* Nav */
 
 /* Hero */
-.hero{position:relative;overflow:hidden;padding:clamp(56px,8vw,112px) 0 clamp(64px,8vw,112px)}
+.hero{position:relative;overflow:hidden;overflow:clip;padding:clamp(56px,8vw,112px) 0 clamp(64px,8vw,112px)}
 .hero .wrap{position:relative;display:flex;flex-wrap:wrap;align-items:center;gap:48px 64px}
 .hero .copy{flex:1.5 1 480px;min-width:0;display:flex;flex-direction:column;gap:24px}
 .hero h1{font-family:var(--serif);font-weight:500;font-size:clamp(44px,5.4vw,76px);line-height:1;letter-spacing:-.02em}
@@ -87,13 +87,13 @@ h2{font-family:var(--serif);font-weight:500;font-size:clamp(32px,4.2vw,58px);lin
 .links a:first-child{background:var(--accent);border-color:var(--accent);color:var(--ink)}
 .links a:first-child:hover{background:#E1C9A5;border-color:#E1C9A5}
 .links a:not(:first-child):hover{border-color:var(--accent);color:#fff}
-.stage{position:relative;background:var(--ink);border:1px solid var(--line);border-radius:16px;overflow:hidden}
+.stage{position:relative;background:var(--ink);border:1px solid var(--line);border-radius:16px;overflow:hidden;overflow:clip}
 .stage .bar{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:10px 14px;border-bottom:1px solid var(--line);font-family:var(--mono);font-size:11px;color:var(--faint)}
 .stage .bar .rec{display:inline-flex;align-items:center;gap:6px;color:var(--teal);white-space:nowrap}
 .stage .bar .rec::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--teal);animation:blink 1.2s steps(1) infinite}
 .stage .bar .w{font-variant-numeric:tabular-nums;white-space:nowrap}
 .viewport{position:relative;height:var(--stage-h);display:flex;align-items:center;justify-content:center;padding:16px 20px;background:radial-gradient(60% 70% at 50% 40%,rgba(124,92,255,.14),transparent 70%)}
-.frame{position:relative;flex:none;overflow:hidden;border-radius:10px;border:6px solid #2A2E36;background:#fff;box-shadow:0 0 0 1px var(--line),0 24px 48px -16px rgba(0,0,0,.8);transition:width 1.4s cubic-bezier(.65,0,.35,1),height 1.4s cubic-bezier(.65,0,.35,1),border-radius 1.4s}
+.frame{position:relative;flex:none;overflow:hidden;overflow:clip;border-radius:10px;border:6px solid #2A2E36;background:#fff;box-shadow:0 0 0 1px var(--line),0 24px 48px -16px rgba(0,0,0,.8);transition:width 1.4s cubic-bezier(.65,0,.35,1),height 1.4s cubic-bezier(.65,0,.35,1),border-radius 1.4s}
 .frame.is-mobile{border-radius:12px}
 .frame iframe{position:absolute;top:0;left:0;border:0;transform-origin:0 0;transition:transform 1.4s cubic-bezier(.65,0,.35,1);pointer-events:none}
 .phone{border-radius:12px;background:#222}
@@ -108,7 +108,7 @@ h2{font-family:var(--serif);font-weight:500;font-size:clamp(32px,4.2vw,58px);lin
 @media (max-width:640px){.projects{grid-template-columns:1fr} .project.wide{grid-column:auto;grid-template-columns:1fr} .project.full{grid-template-columns:1fr} :root{--stage-h:max(260px,40vh)}}
 
 /* Showcase: profile on the left, projects as the main content (Behance-style) */
-.showcase{position:relative;overflow:hidden;padding:40px 0 clamp(64px,8vw,112px)}
+.showcase{position:relative;overflow:hidden;overflow:clip;padding:40px 0 clamp(64px,8vw,112px)}
 .showcase>.wrap{position:relative}
 .showcase-grid{display:grid;grid-template-columns:300px minmax(0,1fr);gap:clamp(32px,4vw,56px);align-items:start}
 .profile{position:sticky;top:32px;display:flex;flex-direction:column;gap:18px}
@@ -147,7 +147,7 @@ h2{font-family:var(--serif);font-weight:500;font-size:clamp(32px,4.2vw,58px);lin
 .tabs a[aria-current="page"]{color:#fff;border-bottom-color:var(--accent)}
 
 /* About: light section, as on ticianapaura.com */
-#about{background:var(--cream);color:var(--cream-ink);overflow:hidden}
+#about{background:var(--cream);color:var(--cream-ink);overflow:hidden;overflow:clip}
 #about .glow{background:radial-gradient(38% 42% at 78% 30%,rgba(124,92,255,.22),transparent 68%),radial-gradient(34% 40% at 20% 75%,rgba(222,160,72,.22),transparent 68%)}
 #about .wrap{position:relative}
 #about .eyebrow{color:var(--cream-label)}
@@ -164,7 +164,7 @@ h2{font-family:var(--serif);font-weight:500;font-size:clamp(32px,4.2vw,58px);lin
 .stack span:not(.label){background:#fff;border:1px solid var(--cream-line);color:var(--cream-ink)}
 
 /* Contact */
-#contact{background:var(--indigo);overflow:hidden}
+#contact{background:var(--indigo);overflow:hidden;overflow:clip}
 #contact .wrap{position:relative}
 #contact .head p:not(.eyebrow){color:var(--indigo-text)}
 .contact-links{display:flex;gap:12px;flex-wrap:wrap}
@@ -350,7 +350,7 @@ document.getElementById('y').textContent=new Date().getFullYear();
   window.__noScrollFocus=function(i){try{var w=i.contentWindow,P=w.HTMLElement.prototype,E=w.Element.prototype,f=P.focus,v=E.scrollIntoView;if(P.__patched)return;
     P.focus=function(o){return f.call(this,Object.assign({},o||{},{preventScroll:true}));};
     // scrollIntoView inside a preview would also scroll this page: run it instantly and put the page back where it was.
-    E.scrollIntoView=function(o){var x=window.scrollX,y=window.scrollY,opt=(o&&typeof o==='object')?Object.assign({},o,{behavior:'instant'}):{block:o===false?'end':'start',behavior:'instant'};v.call(this,opt);if(window.scrollX!==x||window.scrollY!==y)window.scrollTo({left:x,top:y,behavior:'instant'});};
+    E.scrollIntoView=function(o){var x=window.scrollX,y=window.scrollY,opt=(o&&typeof o==='object')?Object.assign({},o,{behavior:'instant'}):{block:o===false?'end':'start',behavior:'instant'};v.call(this,opt);if(window.scrollX!==x||window.scrollY!==y)window.scrollTo({left:x,top:y,behavior:'instant'});for(var el=i.parentElement;el;el=el.parentElement){if(el.scrollTop)el.scrollTop=0;if(el.scrollLeft)el.scrollLeft=0;}};
     P.__patched=true;}catch(e){}};
   // Previews can't move this page: focus and scrollIntoView inside them are patched above, so no scroll guard is needed.
   document.querySelectorAll('iframe').forEach(function(i){i.addEventListener('load',function(){window.__noScrollFocus(i);});});
