@@ -341,7 +341,11 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;
 document.getElementById('y').textContent=new Date().getFullYear();
 (function(){
   // The demos inside the cards focus their own inputs; never let that move the page.
-  window.__noScrollFocus=function(i){try{var w=i.contentWindow,P=w.HTMLElement.prototype,f=P.focus;if(P.__patched)return;P.focus=function(o){return f.call(this,Object.assign({},o||{},{preventScroll:true}));};P.__patched=true;}catch(e){}};
+  window.__noScrollFocus=function(i){try{var w=i.contentWindow,P=w.HTMLElement.prototype,E=w.Element.prototype,f=P.focus,v=E.scrollIntoView;if(P.__patched)return;
+    P.focus=function(o){return f.call(this,Object.assign({},o||{},{preventScroll:true}));};
+    // scrollIntoView inside a preview would also scroll this page: run it instantly and put the page back where it was.
+    E.scrollIntoView=function(o){var x=window.scrollX,y=window.scrollY,opt=(o&&typeof o==='object')?Object.assign({},o,{behavior:'instant'}):{block:o===false?'end':'start',behavior:'instant'};v.call(this,opt);if(window.scrollX!==x||window.scrollY!==y)window.scrollTo({left:x,top:y,behavior:'instant'});};
+    P.__patched=true;}catch(e){}};
   var lastY=window.scrollY,userAt=0;
   ['wheel','touchstart','touchmove','keydown','mousedown','pointerdown'].forEach(function(t){window.addEventListener(t,function(){userAt=Date.now();},{passive:true});});
   // Only undo a jump caused by a demo preview taking focus (iframes can't be clicked, so focus there is never the visitor's); any other scroll is the visitor's and is kept.
